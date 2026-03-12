@@ -82,4 +82,18 @@ bar(imp);
 xlabel('Features');
 ylabel('Importance');
 title('Feature Importance');
+
 xticklabels({'Age','BP','Chol','HR'});
+
+
+newPatient = [55, 145, 240, 85];   % [Age, BloodPressure, Cholesterol, HeartRate]
+
+% Predict using the trained SVM model
+[newPred, newScore] = predict(model, newPatient);
+
+% Display result
+if newPred == categorical(1)
+    fprintf('Prediction: HIGH RISK of cardiac disease (Probability = %.2f%%)\n', newScore(2)*100);
+else
+    fprintf('Prediction: LOW RISK of cardiac disease (Probability = %.2f%%)\n', (1-newScore(2))*100);
+end
